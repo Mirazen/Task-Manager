@@ -20,33 +20,43 @@ export default function TasksAddForm({ onAdd }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Input ur task"
-            />
-
-            <label htmlFor='deadline'>
+        <form onSubmit={handleSubmit} className="mb-4">
+            <div className="d-flex gap-2 mb-2">
                 <input
+                    type="text"
+                    className="form-control"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    placeholder="Input ur task"
+                />
+                <button type="submit" className="btn btn-primary">
+                    Add
+                </button>
+            </div>
+
+            <div className="form-check mb-2">
+                <input
+                    className="form-check-input"
                     type='checkbox'
                     checked={hasCheckMark}
                     onChange={(e) => setHasCheckMark(e.target.checked)}
                 />
-                Set deadline
-            </label>
+                <label className="form-check-label" htmlFor="deadlineCheck">
+                    Set deadline
+                </label>
+            </div>
 
             {hasCheckMark && (
-                <input
-                    type='date'
-                    min={new Date().toISOString().split('T')[0]}
-                    value={selectedDeadline}
-                    onChange={(e) => setSelectedDeadline(e.target.value)}
-                />
+                <div>
+                    <input
+                        type='date'
+                        min={new Date().toISOString().split('T')[0]}
+                        className="form-control"
+                        value={selectedDeadline}
+                        onChange={(e) => setSelectedDeadline(e.target.value)}
+                    />
+                </div>
             )}
-
-            <button type="submit">add</button>
         </form>
     );
 }

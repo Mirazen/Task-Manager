@@ -2,7 +2,7 @@ import TasksItem from "../TasksItem"
 
 export default function TasksList({ tasks, removeTask }) {
     return (
-        <ul>
+        <ul className="list-group">
             {tasks.map((task) => (
                 <TasksItem
                     key={task.id}
