@@ -12,6 +12,7 @@ export default function TaskManager () {
             text: task.text,
             date: new Date().toLocaleString('ru-RU').split(',')[0],
             deadline: task.deadline,
+            isCompleted: false,
         }
         setTasks(list => [newTask, ...list])
     }
@@ -20,12 +21,21 @@ export default function TaskManager () {
         setTasks(tasks.filter(task => task.id !==id))
     }
 
+    const toggleTaskComplete = (id) => {
+        setTasks(prevTask =>
+            prevTask.map((task) =>
+                task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
+            )
+        )
+    }
+
     return( 
         <div>
             <TasksAddForm  onAdd={addTask} />
             <TasksList
                 tasks={tasks}
                 removeTask={removeTask}
+                toggleTaskComplete={toggleTaskComplete}
             />
         </div>
     )
